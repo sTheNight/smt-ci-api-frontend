@@ -5,7 +5,6 @@ import { API_URL, getHistoryBuild, MAX_HISTORY_ITEM_NUM } from "@/services/api";
 import { ChevronLeft, DownloadIcon, RefreshCcw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { motion } from "motion/react"
 import { toast } from "sonner";
 import {
     Pagination,

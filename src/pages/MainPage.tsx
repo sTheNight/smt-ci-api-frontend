@@ -26,7 +26,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { useNavigate } from 'react-router'
 import { AnimatePresence } from "motion/react"
 
-type MainPageState = "error" | "success" | "loading";
+type MainPageState = "error" | "success" | "loading" | "empty";
 export function MainPage() {
     const [loading, setLoading] = useState(true)
     const [artifact, setArtifact] = useState<GithubArtifact | null>(null)
@@ -78,9 +78,9 @@ export function MainPage() {
                 <motion.div
                     key={state}
                     className='box-border h-full w-full max-w-2xl flex items-center justify-center flex-col'
-                    initial={{ opacity: 0, filter: "blur(8px)" }}
-                    exit={{ opacity: 0, filter: "blur(8px)" }}
-                    animate={{ transition: { duration: 0.1, ease: "easeInOut" }, opacity: 1, filter: "blur(0)" }}>
+                    initial={{ opacity: 0 }}
+                    exit={{ opacity: 0 }}
+                    animate={{ transition: { duration: 0.1, ease: "easeInOut" }, opacity: 1 }}>
                     {content}
                 </motion.div>
             </AnimatePresence>

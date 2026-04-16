@@ -54,15 +54,15 @@ function artifactToList(artifact: GithubArtifact): ArtifactInfoItem[] {
             value: artifact.id,
         },
         {
-            name: "Created",
+            name: "Created at",
             value: getFormateDate(artifact.created_at),
         },
         {
-            name: "Updated",
+            name: "Updated at",
             value: getFormateDate(artifact.updated_at),
         },
         {
-            name: "Expires",
+            name: "Expires at",
             value: getFormateDate(artifact.expires_at),
         },
         {

@@ -25,6 +25,7 @@ import { DownloadIcon, HistoryIcon, RefreshCwIcon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useNavigate } from 'react-router'
 import { AnimatePresence } from "motion/react"
+import { ArtifactInfoDialog } from '@/components/AtrifactInfoDialog'
 
 type MainPageState = "error" | "success" | "loading" | "empty";
 export function MainPage() {
@@ -143,9 +144,14 @@ function LatestBuildInfo({ artifact, fetchLatestBuild }: LatestBuildInfoProps) {
                         <h1 className='text-3xl font-bold m-0 p-0'>{artifact?.name}</h1>
                         <p className='text-sm text-muted-foreground'>#{artifact?.id}</p>
                     </div>
-                    <Badge variant={artifact?.expired ? 'unavaliable' : 'avaliable'}>
-                        {artifact?.expired ? '不可用' : '可用'}
-                    </Badge>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Badge variant={artifact?.expired ? 'unavaliable' : 'avaliable'} className='cursor-pointer'>
+                                {artifact?.expired ? '不可用' : '可用'}
+                            </Badge>
+                        </DialogTrigger>
+                        <ArtifactInfoDialog artifact={artifact!} />
+                    </Dialog>
                 </div>
             </div>
             <div className='w-full mt-6'>

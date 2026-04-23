@@ -40,9 +40,9 @@ export function MainPage() {
     }, [loading, error]);
 
     let content: React.ReactNode;
-    function fetchLatestBuild() {
+    function fetchLatestBuild(useCache?: boolean) {
         setLoading(true)
-        getLatestBuild().then((data) => {
+        getLatestBuild(useCache).then((data) => {
             setArtifact(data.data)
         }).catch((err) => {
             toast.error('获取最新构建失败')
@@ -222,7 +222,7 @@ function AboutDialog() {
 
 interface ActionButtonGrupProps {
     artifact: GithubArtifact | null,
-    fetchLatestBuild: () => void
+    fetchLatestBuild: (useCache?: boolean) => void
 }
 function ActionButtonGroup({ artifact, fetchLatestBuild }: ActionButtonGrupProps) {
     const navigate = useNavigate()
@@ -243,7 +243,7 @@ function ActionButtonGroup({ artifact, fetchLatestBuild }: ActionButtonGrupProps
             </Tooltip>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <Button variant='outline' size='lg' className='shrink-0' onClick={(fetchLatestBuild)}>
+                    <Button variant='outline' size='lg' className='shrink-0' onClick={() => fetchLatestBuild(false)}>
                         <RefreshCwIcon />
                     </Button>
                 </TooltipTrigger>

@@ -158,7 +158,7 @@ function LatestBuildInfo({ artifact, fetchLatestBuild }: LatestBuildInfoProps) {
                 <div className='grid grid-cols-2 border border-gray-200'>
                     {[
                         { label: '分支', value: artifact?.workflow_run.head_branch },
-                        { label: '提交', value: artifact?.workflow_run.head_sha?.slice(0, 7), mono: true },
+                        { label: '提交', value: artifact?.workflow_run.head_sha?.slice(0, 7) },
                         { label: '构建时间', value: new Date(artifact?.created_at || '').toLocaleString() },
                         { label: '文件大小', value: `${((artifact?.size_in_bytes ?? 0) / 1024 / 1024).toFixed(2)} MB` },
                     ].map((item, i) => (
@@ -166,10 +166,10 @@ function LatestBuildInfo({ artifact, fetchLatestBuild }: LatestBuildInfoProps) {
                             key={item.label}
                             className={`p-5 ${i % 2 === 0 ? 'border-r border-gray-200' : ''} ${i < 2 ? 'border-b border-gray-200' : ''}`}
                         >
-                            <div className='text-[9px] font-semibold uppercase tracking-[1.5px] text-muted-foreground'>
+                            <div className='text-[10px] font-semibold uppercase tracking-[1.5px] text-muted-foreground'>
                                 {item.label}
                             </div>
-                            <div className={`mt-1.5 text-sm font-medium text-muted-foreground ${item.mono ? 'font-mono text-xs' : ''}`}>
+                            <div className={`mt-1.5 text-sm font-medium text-muted-foreground`}>
                                 {item.value}
                             </div>
                         </div>

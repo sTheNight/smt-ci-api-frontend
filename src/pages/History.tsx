@@ -101,7 +101,7 @@ export function HistoryPage() {
 
     return (
         <div className="h-dvh w-full box-border p-6 flex justify-center">
-            <div className="w-full max-w-3xl flex flex-col">
+            <div className="w-full max-w-2xl flex flex-col">
                 <div className="flex items-center">
                     <Button variant="ghost" onClick={() => navigate("/")}>
                         <ChevronLeft />

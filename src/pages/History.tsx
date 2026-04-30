@@ -78,6 +78,7 @@ export function HistoryPage() {
 
     function fetchHistoryBuild(page: number = 1) {
         setLoading(true);
+        setError(null);
 
         getHistoryBuild(page)
             .then((data) => {
@@ -117,7 +118,7 @@ export function HistoryPage() {
                         key={state}
                         initial={{ opacity: 0 }}
                         exit={{ opacity: 0 }}
-                        animate={{ transition: { duration: 0.1, ease: "easeInOut" }, opacity: 1 }}>
+                        animate={{ transition: { duration: 0.05, ease: "easeInOut" }, opacity: 1 }}>
                         {content}
                     </motion.div>
                 </AnimatePresence>
@@ -160,11 +161,37 @@ function HistoryBuildList({ historyArtifact, currentPage, pageNum, setCurrentPag
 
     return (
         <>
-            <div className="flex flex-col gap-3">
+            <motion.div
+                className="flex flex-col gap-3"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                    hidden: {},
+                    visible: {
+                        transition: {
+                            staggerChildren: 0.04,
+                        },
+                    },
+                }}
+            >
                 {historyArtifact.artifacts.map((item) => (
-                    <div
+                    <motion.div
                         key={item.id}
                         className="grid grid-cols-[80px_1fr_1fr_auto_auto] items-center gap-4 px-4 py-3 border rounded-xl transition hover:bg-muted/50"
+                        variants={{
+                            hidden: {
+                                opacity: 0,
+                                y: 8,
+                            },
+                            visible: {
+                                opacity: 1,
+                                y: 0,
+                                transition: {
+                                    duration: 0.18,
+                                    ease: "easeOut",
+                                },
+                            },
+                        }}
                     >
                         <div className="text-sm text-muted-foreground truncate">
                             #{item.id}
@@ -206,9 +233,9 @@ function HistoryBuildList({ historyArtifact, currentPage, pageNum, setCurrentPag
                         >
                             <DownloadIcon className="w-4 h-4" />
                         </Button>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
 
             {pageNum > 1 && (
                 <Pagination className="mt-6">

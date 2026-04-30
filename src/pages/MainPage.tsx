@@ -42,6 +42,7 @@ export function MainPage() {
     let content: React.ReactNode;
     function fetchLatestBuild(useCache?: boolean) {
         setLoading(true)
+        setError(null)
         getLatestBuild(useCache).then((data) => {
             setArtifact(data.data)
         }).catch((err) => {
@@ -59,18 +60,22 @@ export function MainPage() {
         fetchLatestBuild()
     }, [])
 
-    if (state == "loading") {
-        content = (
-            <LoadingTips />
-        )
-    } else if (state == "error") {
-        content = (
-            <NullOrErrorTip fetchLatestBuild={fetchLatestBuild} error={error!} />
-        )
-    } else {
-        content = (
-            <LatestBuildInfo artifact={artifact} fetchLatestBuild={fetchLatestBuild} />
-        )
+    switch (state) {
+        case "loading":
+            content = (
+                <LoadingTips />
+            )
+            break;
+        case "error":
+            content = (
+                <NullOrErrorTip fetchLatestBuild={() => fetchLatestBuild()} error={error!} />
+            )
+            break;
+        case "success":
+            content = (
+                <LatestBuildInfo artifact={artifact} fetchLatestBuild={() => fetchLatestBuild()} />
+            )
+            break;
     }
 
     return (
@@ -81,7 +86,7 @@ export function MainPage() {
                     className='box-border h-full w-full max-w-2xl flex items-center justify-center flex-col'
                     initial={{ opacity: 0 }}
                     exit={{ opacity: 0 }}
-                    animate={{ transition: { duration: 0.1, ease: "easeInOut" }, opacity: 1 }}>
+                    animate={{ transition: { duration: 0.05, ease: "easeInOut" }, opacity: 1 }}>
                     {content}
                 </motion.div>
             </AnimatePresence>

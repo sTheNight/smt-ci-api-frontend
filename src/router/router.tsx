@@ -1,7 +1,4 @@
 import { AnimatedRouter } from "@/components/AnimatedRouter";
-import { HistoryPage } from "@/pages/History";
-import { MainPage } from "@/pages/MainPage";
-import { NotFound } from "@/pages/NotFound";
 import { createBrowserRouter } from "react-router";
 export const router = createBrowserRouter([
     {
@@ -10,15 +7,24 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                Component: MainPage
+                lazy: async () => {
+                    const { MainPage } = await import("@/pages/MainPage")
+                    return { Component: MainPage }
+                }
             },
             {
                 path: '/history',
-                Component: HistoryPage
+                lazy: async () => {
+                    const { HistoryPage } = await import("@/pages/History")
+                    return { Component: HistoryPage }
+                }
             },
             {
                 path: "*",
-                Component: NotFound
+                lazy: async () => {
+                    const { NotFound } = await import("@/pages/NotFound")
+                    return { Component: NotFound }
+                }
             }
         ]
     }

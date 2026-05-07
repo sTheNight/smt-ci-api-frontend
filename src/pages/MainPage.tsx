@@ -197,7 +197,7 @@ function GithubDropdownMenu() {
                     <DropdownMenuItem onClick={() => window.open("https://github.com/youfeng11/SFS-MobileTools")}>
                         SFS-MobileTools
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => window.open("https://github.com/sTheNight/SFS-MobileTools-CI-rs")}>
+                    <DropdownMenuItem onClick={() => window.open("https://github.com/sTheNight/smt-ci-api-rs")}>
                         API Service
                     </DropdownMenuItem>
                 </DropdownMenuGroup>

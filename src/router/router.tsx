@@ -1,6 +1,7 @@
 import { AnimatedRouter } from "@/components/AnimatedRouter";
 import { HistoryPage } from "@/pages/History";
 import { MainPage } from "@/pages/MainPage";
+import { NotFound } from "@/pages/NotFound";
 import { createBrowserRouter } from "react-router";
 export const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
             {
                 path: '/history',
                 Component: HistoryPage
+            },
+            {
+                path: "*",
+                Component: NotFound
             }
         ]
     }
